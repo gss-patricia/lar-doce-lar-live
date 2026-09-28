@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 // (A parada 2 — chave — e a 5 — headers — são corrigidas em live coding.)
 export const PARADAS = {
   janelas: "1. Janelas",
+  mordomo: "7. O mordomo",
 } as const;
 
 export type Parada = keyof typeof PARADAS;

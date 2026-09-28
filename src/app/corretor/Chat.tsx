@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { SendHorizontal, Sparkles } from "lucide-react";
 import { PROMPT_DO_CORRETOR, type Mensagem } from "@/lib/corretor";
+import type { Modo } from "@/lib/modo";
+import { Resposta } from "./Resposta";
 
 // 🔓 PARADA 2 — CHAVE DEBAIXO DO TAPETE
 // O navegador chama a IA direto, com a chave em NEXT_PUBLIC_*.
@@ -26,7 +28,7 @@ async function perguntarAoCorretor(mensagens: Mensagem[]): Promise<string> {
 
 const SUGESTOES = ["Qual imóvel é o mais barato?", "Tem casa com piscina?", "Quais aceitam pets?"];
 
-export function Chat() {
+export function Chat({ modo }: { modo: Modo }) {
   const [mensagens, setMensagens] = useState<Mensagem[]>([]);
   const [texto, setTexto] = useState("");
   const [pensando, setPensando] = useState(false);
@@ -98,9 +100,7 @@ export function Chat() {
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-terracota">
                 <Sparkles className="h-4 w-4 text-white" />
               </span>
-              <div className="whitespace-pre-wrap rounded-3xl rounded-tl-md bg-white px-5 py-3 shadow-sm ring-1 ring-areia">
-                {m.content}
-              </div>
+              <Resposta texto={m.content} modo={modo} />
             </div>
           ),
         )}
